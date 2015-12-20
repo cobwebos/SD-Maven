@@ -20,6 +20,7 @@ package org.apache.maven.project;
  */
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Date;
 import java.util.List;
 import java.util.Properties;
@@ -71,6 +72,8 @@ public class DefaultProjectBuildingRequest
 
     private RepositoryMerging repositoryMerging = RepositoryMerging.POM_DOMINANT;
 
+    private List<String> goals;
+
     public DefaultProjectBuildingRequest()
     {
         processPlugins = true;
@@ -100,6 +103,7 @@ public class DefaultProjectBuildingRequest
         setProject( request.getProject() );
         setResolveDependencies( request.isResolveDependencies() );
         setValidationLevel( request.getValidationLevel() );
+        setGoals( request.getGoals() );
     }
 
     public MavenProject getProject()
@@ -336,6 +340,19 @@ public class DefaultProjectBuildingRequest
     public DefaultProjectBuildingRequest setRepositoryMerging( RepositoryMerging repositoryMerging )
     {
         this.repositoryMerging = Validate.notNull( repositoryMerging, "repositoryMerging cannot be null" );
+        return this;
+    }
+
+    @Override
+    public List<String> getGoals()
+    {
+        return this.goals;
+    }
+
+    @Override
+    public DefaultProjectBuildingRequest setGoals( final List<String> value )
+    {
+        this.goals = value != null ? Collections.unmodifiableList( value ) : null;
         return this;
     }
 
