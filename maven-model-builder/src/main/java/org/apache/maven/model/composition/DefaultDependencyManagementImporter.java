@@ -49,9 +49,15 @@ public class DefaultDependencyManagementImporter
         {
             Map<String, Dependency> dependencies = new LinkedHashMap<>();
 
+<<<<<<< HEAD
             DependencyManagement depMgmt = target.getDependencyManagement();
 
             if ( depMgmt != null )
+=======
+            target.setDependencyManagement( targetDependencyManagement );
+
+            for ( final Dependency targetDependency : targetDependencyManagement.getDependencies() )
+>>>>>>> [MNG-5971] Imported dependencies should be available to inheritance processing
             {
                 for ( Dependency dependency : depMgmt.getDependencies() )
                 {
@@ -76,7 +82,11 @@ public class DefaultDependencyManagementImporter
                 }
             }
 
+<<<<<<< HEAD
             depMgmt.setDependencies( new ArrayList<>( dependencies.values() ) );
+=======
+            targetDependencyManagement.getDependencies().addAll( sourceDependencies );
+>>>>>>> [MNG-5971] Imported dependencies should be available to inheritance processing
         }
     }
 
