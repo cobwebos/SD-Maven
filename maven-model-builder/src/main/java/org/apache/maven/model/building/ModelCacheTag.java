@@ -51,6 +51,7 @@ interface ModelCacheTag<T>
      * cache is populated but the state of the cache must not change so we need to make a copy.
      *
      * @param data The data to store in the cache, must not be {@code null}.
+     *
      * @return The data being stored in the cache, never {@code null}.
      */
     T intoCache( T data );
@@ -60,6 +61,7 @@ interface ModelCacheTag<T>
      * cache is queried but the state of the cache must not change so we need to make a copy.
      *
      * @param data The data to retrieve from the cache, must not be {@code null}.
+     *
      * @return The data being retrieved from the cache, never {@code null}.
      */
     T fromCache( T data );
