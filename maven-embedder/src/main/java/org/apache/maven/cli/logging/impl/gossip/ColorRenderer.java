@@ -24,6 +24,7 @@ import static org.fusesource.jansi.Ansi.Color.CYAN;
 import static org.fusesource.jansi.Ansi.Color.GREEN;
 import static org.fusesource.jansi.Ansi.Color.RED;
 import static org.fusesource.jansi.Ansi.Color.YELLOW;
+import static org.fusesource.jansi.Ansi.Color.WHITE;
 import static org.fusesource.jansi.Ansi.ansi;
 
 import com.planet57.gossip.Event;
@@ -49,7 +50,7 @@ public class ColorRenderer
         {
             case TRACE:
             case DEBUG:
-                buff.append( ansi().a( INTENSITY_BOLD ).fg( YELLOW ).a( level.name() ).reset() );
+                buff.append( ansi().a( INTENSITY_BOLD ).fg( WHITE ).a( level.name() ).reset() );
                 break;
 
             case INFO:
@@ -58,7 +59,7 @@ public class ColorRenderer
 
             case WARN:
                 // Maven uses WARNING instead of WARN
-                buff.append( ansi().a( INTENSITY_BOLD ).fg( RED ).a( WARNING ).reset() );
+                buff.append( ansi().a( INTENSITY_BOLD ).fg( YELLOW ).a( WARNING ).reset() );
                 break;
 
             case ERROR:
