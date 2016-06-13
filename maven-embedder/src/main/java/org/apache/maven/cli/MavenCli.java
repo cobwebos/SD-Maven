@@ -524,6 +524,8 @@ public class MavenCli
             File logFile = new File( cliRequest.commandLine.getOptionValue( CLIManager.LOG_FILE ) );
             logFile = resolveFile( logFile, cliRequest.workingDirectory );
 
+            Ansi.setEnabled( false );
+
             // redirect stdout and stderr to file
             try
             {
