@@ -100,6 +100,10 @@ public class CLIManager
     public static final String LEGACY_LOCAL_REPOSITORY = "llr";
 
     public static final String BUILDER = "b";
+    
+    public static final String LIST_FEATURES = "lf";
+    
+    public static final String ACTIVATE_FEATURES = "af";
 
     protected Options options;
 
@@ -140,6 +144,8 @@ public class CLIManager
         options.addOption( OptionBuilder.withLongOpt( "threads" ).hasArg().withDescription( "Thread count, for instance 2.0C where C is core multiplied" ).create( THREADS ) );
         options.addOption( OptionBuilder.withLongOpt( "legacy-local-repository" ).withDescription( "Use Maven 2 Legacy Local Repository behaviour, ie no use of _remote.repositories. Can also be activated by using -Dmaven.legacyLocalRepo=true" ).create( LEGACY_LOCAL_REPOSITORY ) );
         options.addOption( OptionBuilder.withLongOpt( "builder" ).hasArg().withDescription( "The id of the build strategy to use." ).create( BUILDER ) );
+        options.addOption( OptionBuilder.withLongOpt( "list-features" ).withDescription( "List the exiting features which can be activated." ).create( LIST_FEATURES) );
+        options.addOption( OptionBuilder.withLongOpt( "activate-features" ).withDescription( "Comma-delimited list of features to be actived." ).hasArg().create( ACTIVATE_FEATURES ) );
 
         // Adding this back in for compatibility with the verifier that hard codes this option.
         options.addOption( OptionBuilder.withLongOpt( "no-plugin-registry" ).withDescription( "Ineffective, only kept for backward compatibility" ).create( "npr" ) );

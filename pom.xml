@@ -81,6 +81,7 @@ under the License.
   </properties>
 
   <modules>
+    <module>maven-feature</module>
     <module>maven-plugin-api</module>
     <module>maven-builder-support</module>
     <module>maven-model</module>
@@ -165,6 +166,11 @@ under the License.
   <dependencyManagement>
     <!--bootstrap-end-comment-->
     <dependencies>
+      <dependency>
+        <groupId>org.apache.maven</groupId>
+        <artifactId>maven-feature</artifactId>
+        <version>${project.version}</version>
+      </dependency>
       <!--  Maven Modules -->
       <!--bootstrap-start-comment-->
       <dependency>

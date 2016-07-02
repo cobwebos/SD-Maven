@@ -24,6 +24,7 @@ import java.io.File;
 import junit.framework.TestCase;
 
 import org.apache.commons.cli.ParseException;
+import org.apache.maven.feature.AvailableFeatureToggles;
 
 public class MavenCliTest
     extends TestCase
@@ -107,4 +108,5 @@ public class MavenCliTest
 
         }
     }
+    
 }
