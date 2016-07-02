@@ -22,6 +22,7 @@ package org.apache.maven.cli;
 import java.io.File;
 
 import org.apache.commons.cli.ParseException;
+import org.apache.maven.feature.AvailableFeatureToggles;
 
 import junit.framework.TestCase;
 

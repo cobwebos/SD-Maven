@@ -36,6 +36,8 @@ import org.apache.maven.execution.MavenExecutionRequest;
 import org.apache.maven.execution.MavenExecutionResult;
 import org.apache.maven.execution.MavenSession;
 import org.apache.maven.execution.ProjectDependencyGraph;
+import org.apache.maven.feature.AvailableFeatureToggles;
+import org.apache.maven.feature.FeatureToggles;
 import org.apache.maven.model.Plugin;
 import org.apache.maven.model.building.DefaultModelProblem;
 import org.apache.maven.model.building.ModelProblem;
@@ -65,6 +67,10 @@ public class DefaultGraphBuilder
 
     @Requirement
     protected ProjectBuilder projectBuilder;
+    
+    @Requirement
+    private FeatureToggles selectedFeatures;
+    
 
     @Override
     public Result<ProjectDependencyGraph> build( MavenSession session )
@@ -74,6 +80,10 @@ public class DefaultGraphBuilder
             return dependencyGraph( session, session.getProjects(), false );
         }
         
+        if (selectedFeatures.isToggleActive( AvailableFeatureToggles.MNG10000 )) {
+            logger.info( " -> Features MNG 10000 is activated." );
+        }
+
         List<MavenProject> projects = session.getProjects();
 
         if ( projects == null )
