@@ -20,6 +20,7 @@ package org.apache.maven.feature;
  */
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 
@@ -50,6 +51,8 @@ public class DefaultFeatureToggles
         if ( featuresToBeActivated == null )
         {
             this.activatedFeatureToggles = new ArrayList<>();
+            List<ActivatedFeatureToggles> asList = Arrays.asList( ActivatedFeatureToggles.getActivatedFeatureToggles());
+            this.activatedFeatureToggles.addAll( asList );
         }
         else
         {
