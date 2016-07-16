@@ -162,6 +162,8 @@ public class DefaultMavenExecutionRequest
     private boolean useLegacyLocalRepositoryManager = false;
 
     private Map<String, Object> data;
+    
+    private boolean failOnMissingProfiles;
 
     public DefaultMavenExecutionRequest()
     {
@@ -1282,5 +1284,18 @@ public class DefaultMavenExecutionRequest
         }
 
         return data;
+    }
+
+    @Override
+    public boolean isFailOnMissingProfiles()
+    {
+        return failOnMissingProfiles;
+    }
+    
+    @Override
+    public MavenExecutionRequest setFailOnMissingProfiles( boolean failOnMissingProfiles )
+    {
+        this.failOnMissingProfiles = failOnMissingProfiles;
+        return this;
     }
 }

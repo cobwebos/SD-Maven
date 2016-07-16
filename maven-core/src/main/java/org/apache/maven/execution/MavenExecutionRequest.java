@@ -443,4 +443,19 @@ public interface MavenExecutionRequest
      * @since 3.3.0
      */
     Map<String, Object> getData();
+    
+    /**
+     * @return {@code true} if we should fail on missing profiles {@code false} otherwise.
+     * @since 3.4.0
+     */
+    boolean isFailOnMissingProfiles();
+
+    /**
+     * {@code true} to fail the build on missing profiles {@code false} otherwise.
+     * @param failOnMissingProfiles true/false.
+     * @return {@link MavenExecutionRequest}
+     * @since 3.4.0
+     */
+    MavenExecutionRequest setFailOnMissingProfiles( boolean failOnMissingProfiles );
+
 }

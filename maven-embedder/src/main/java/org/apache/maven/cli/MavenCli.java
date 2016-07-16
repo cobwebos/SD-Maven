@@ -1572,6 +1572,11 @@ public class MavenCli
             }
         }
 
+        if ( commandLine.hasOption( CLIManager.FAIL_ON_MISSING_PROFILES ) )
+        {
+            request.setFailOnMissingProfiles( true );
+        }
+
         //
         // Allow the builder to be overridden by the user if requested. The builders are now pluggable.
         //
