@@ -233,6 +233,9 @@ public class DefaultModelBuilder
         return this;
     }
 
+    /**
+     * @since 3.4
+     */
     public DefaultModelBuilder setReportingConverter( ReportingConverter reportingConverter )
     {
         this.reportingConverter = reportingConverter;
