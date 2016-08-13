@@ -46,11 +46,17 @@ public interface ModelProblem
      */
     enum Version
     {
+
         //based on ModeBuildingResult.validationLevel
         BASE,
         V20,
         V30,
-        V31
+        V31,
+        /**
+         * @since 3.4
+         */
+        V35
+
     }
 
     /**
