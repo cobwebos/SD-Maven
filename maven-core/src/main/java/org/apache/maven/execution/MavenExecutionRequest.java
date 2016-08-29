@@ -93,6 +93,16 @@ public interface MavenExecutionRequest
 
     String CHECKSUM_POLICY_WARN = ArtifactRepositoryPolicy.CHECKSUM_POLICY_WARN;
 
+    public enum FailLevel {
+        /**
+         * The default level on which Maven will fail the build.
+         */
+        ERROR, 
+        /**
+         * In case of warnings fail the build.
+         */
+        WARN
+    }
     // ----------------------------------------------------------------------
     //
     // ----------------------------------------------------------------------
@@ -445,17 +455,28 @@ public interface MavenExecutionRequest
     Map<String, Object> getData();
     
     /**
-     * @return {@code true} if we should fail on missing profiles {@code false} otherwise.
+     * @return the current {@link FailLevel}
      * @since 3.4.0
      */
-    boolean isFailOnMissingProfiles();
+    FailLevel getFailLevel();
 
     /**
-     * {@code true} to fail the build on missing profiles {@code false} otherwise.
-     * @param failOnMissingProfiles true/false.
+     * Set the fail level to one of {@link FailLevel}.
+     * @param The FailLevel.
      * @return {@link MavenExecutionRequest}
      * @since 3.4.0
      */
-    MavenExecutionRequest setFailOnMissingProfiles( boolean failOnMissingProfiles );
+    MavenExecutionRequest setFailLevel( FailLevel failLevel );
 
+    /**
+     * check if FailLevel is {@code WARN}.
+     * @return true if {@link FailLevel} is {@code WARN}. 
+     */
+    boolean isFailLevelWARN();
+    /**
+     * check if FailLevel is {@code ERROR}.
+     * @return true if {@link FailLevel} is {@code ERROR}. 
+     */
+    boolean isFailLevelERROR();
+    
 }
