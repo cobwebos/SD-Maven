@@ -52,7 +52,7 @@ public class DefaultFeatureToggles
         {
             this.activatedFeatureToggles = new ArrayList<>();
             List<ActivatedFeatureToggles> asList = Arrays.asList( ActivatedFeatureToggles.getActivatedFeatureToggles());
-//            this.activatedFeatureToggles.addAll( asList );
+            this.activatedFeatureToggles.addAll( asList );
         }
         else
         {

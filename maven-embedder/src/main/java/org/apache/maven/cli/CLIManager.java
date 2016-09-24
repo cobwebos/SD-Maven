@@ -143,7 +143,7 @@ public class CLIManager
         options.addOption( OptionBuilder.withLongOpt( "encrypt-password" ).hasOptionalArg().withDescription( "Encrypt server password" ).create( ENCRYPT_PASSWORD ) );
         options.addOption( OptionBuilder.withLongOpt( "threads" ).hasArg().withDescription( "Thread count, for instance 2.0C where C is core multiplied" ).create( THREADS ) );
         options.addOption( OptionBuilder.withLongOpt( "legacy-local-repository" ).withDescription( "Use Maven 2 Legacy Local Repository behaviour, ie no use of _remote.repositories. Can also be activated by using -Dmaven.legacyLocalRepo=true" ).create( LEGACY_LOCAL_REPOSITORY ) );
-        options.addOption( OptionBuilder.withLongOpt( "builder" ).hasArg().withDescription( "The id of the build strategy to use" ).create( BUILDER ) );
+        options.addOption( OptionBuilder.withLongOpt( "builder" ).hasArg().withDescription( "The id of the build strategy to use." ).create( BUILDER ) );
         options.addOption( OptionBuilder.withLongOpt( "list-features" ).withDescription( "List the exiting features which can be activated." ).create( LIST_FEATURES) );
         options.addOption( OptionBuilder.withLongOpt( "activate-features" ).withDescription( "Comma-delimited list of features to be actived." ).hasArg().create( ACTIVATE_FEATURES ) );
 
