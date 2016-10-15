@@ -82,7 +82,7 @@ public class MavenSimpleLogger
             t = t.getCause();
             if ( t != null )
             {
-                stream.append( buffer().strong( "td by" ).a( ": " ).a( t.getClass().getName() ).toString() );
+                stream.append( buffer().strong( "Caused by" ).a( ": " ).a( t.getClass().getName() ).toString() );
                 if ( t.getMessage() != null )
                 {
                     stream.append( ": " );
