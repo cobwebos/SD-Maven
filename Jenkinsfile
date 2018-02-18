@@ -98,6 +98,25 @@ parallel linuxJava7:{
                 }
             }
         }
+    },linuxJava9: {
+        node(jenkinsEnv.labelForOS('linux')) {
+            stage ('Linux Java 9') {
+                String jdkName = jenkinsEnv.jdkFromVersion('linux', '9')
+                String mvnName = jenkinsEnv.mvnFromVersion('linux', buildMvn)
+                dir('test') {
+                    def WORK_DIR=pwd()
+                    checkout tests
+                    sh "rm -rvf $WORK_DIR/apache-maven-dist.zip $WORK_DIR/it-local-repo"
+                    unstash 'dist'
+                    withMaven(jdk: jdkName, maven: mvnName, mavenLocalRepo:"${WORK_DIR}/it-local-repo", options:[
+                        junitPublisher(ignoreAttachments: false)
+                    ]) {
+                        sh "mvn clean install -P$CORE_IT_PROFILES -B -U -V -Dmaven.test.failure.ignore=true -DmavenDistro=$WORK_DIR/apache-maven-dist.zip"
+                    }
+                    deleteDir() // clean up after ourselves to reduce disk space
+                }
+            }
+        }
     }, winJava7: {
         node(jenkinsEnv.labelForOS('windows')) {
             stage ('Windows Java 7') {
@@ -126,6 +145,30 @@ parallel linuxJava7:{
         node(jenkinsEnv.labelForOS('windows')) {
             stage ('Windows Java 8') {
                 String jdkName = jenkinsEnv.jdkFromVersion('windows', '8')
+                String mvnName = jenkinsEnv.mvnFromVersion('windows', buildMvn)
+
+                // need a short path or we hit 256 character limit for paths
+                // using EXECUTOR_NUMBER guarantees that concurrent builds on same agent
+                // will not trample each other
+                dir("/mvn-it-${EXECUTOR_NUMBER}.tmp") {
+                    def WORK_DIR=pwd()
+                    checkout tests
+                    bat "if exist it-local-repo rmdir /s /q it-local-repo"
+                    bat "if exist apache-maven-dist.zip del /q apache-maven-dist.zip"
+                    unstash 'dist'
+                    withMaven(jdk: jdkName, maven: mvnName, mavenLocalRepo:"${WORK_DIR}/it-local-repo", options:[
+                        junitPublisher(ignoreAttachments: false)
+                    ]) {
+                        bat "mvn clean install -P$CORE_IT_PROFILES -B -U -V -Dmaven.test.failure.ignore=true -DmavenDistro=$WORK_DIR/apache-maven-dist.zip"
+                    }
+                    deleteDir() // clean up after ourselves to reduce disk space
+                }
+            }
+        }
+    }, winJava9: {
+        node(jenkinsEnv.labelForOS('windows')) {
+            stage ('Windows Java 9') {
+                String jdkName = jenkinsEnv.jdkFromVersion('windows', '9')
                 String mvnName = jenkinsEnv.mvnFromVersion('windows', buildMvn)
 
                 // need a short path or we hit 256 character limit for paths
