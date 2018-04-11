@@ -141,19 +141,45 @@ public class ExecutionEventLogger
         }
     }
 
+    private boolean isSingleVersionedReactor( MavenSession session )
+    {
+        boolean result = true;
+
+        MavenProject topProject = session.getTopLevelProject();
+        List<MavenProject> sortedProjects = session.getProjectDependencyGraph().getSortedProjects();
+        for ( MavenProject mavenProject : sortedProjects )
+        {
+            if ( !topProject.getVersion().equals( mavenProject.getVersion() ) )
+            {
+                result = false;
+                break;
+            }
+        }
+
+        return result;
+    }
+
     private void logReactorSummary( MavenSession session )
     {
+        boolean isSingleVersion = isSingleVersionedReactor( session );
+
         infoLine( '-' );
 
-        infoMain( "Reactor Summary:" );
+        StringBuilder summary = new StringBuilder( "Reactor Summary" );
+        if ( isSingleVersion )
+        {
+            summary.append( " (" );
+            summary.append( session.getTopLevelProject().getVersion() );
+            summary.append( ")" );
+        }
+        summary.append( ":" );
+        infoMain( summary.toString() );
 
         logger.info( "" );
 
         MavenExecutionResult result = session.getResult();
 
         List<MavenProject> projects = session.getProjects();
-        MavenProject lastProject = projects.get( projects.size() - 1 );
-        MavenProject topProject = session.getTopLevelProject();
 
         for ( MavenProject project : projects )
         {
@@ -162,8 +188,7 @@ public class ExecutionEventLogger
             buffer.append( project.getName() );
             buffer.append( ' ' );
 
-            if ( topProject.equals( project ) || lastProject.equals( project )
-                || !topProject.getVersion().equals( project.getVersion() ) )
+            if ( !isSingleVersion )
             {
                 buffer.append( project.getVersion() );
                 buffer.append( ' ' );
@@ -241,7 +266,7 @@ public class ExecutionEventLogger
 
         String wallClock = session.getRequest().getDegreeOfConcurrency() > 1 ? " (Wall Clock)" : "";
 
-        logger.info( "Total time: " + formatDuration( time ) + wallClock );
+        logger.info( "Total time:  " + formatDuration( time ) + wallClock );
 
         logger.info( "Finished at: " + formatTimestamp( finish ) );
     }
